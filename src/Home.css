@@ -5,14 +5,14 @@
   align-items: center;
   height: 100vh;
   background-color: #0a022e;
-  padding: 0 100px;
+  padding: 0 200px;
 }
 
 .navbar {
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  padding: 20px;
+  padding: 25px;
   position: absolute;
   top: 0;
   right: 0;
@@ -54,12 +54,12 @@
 }
 
 h1 {
-  font-size: 5em;
+  font-size: 4em;
   margin-bottom: 0.5em;
   color: #536a99;
 }
 
 p {
-  font-size: 1.6em;
+  font-size: 1.4em;
   color: #536a99;
 }
