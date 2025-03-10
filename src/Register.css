@@ -1,0 +1,77 @@
+@keyframes colorAnimation {
+    0% {background-color: #0a022e;}
+    25% {background-color: #280ab2;}
+    50% {background-color: #8738de;}
+    75% {background-color: #640e3d;}
+    100% {background-color: #0a022e;}
+  }
+  
+  .form-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    animation: colorAnimation 10s infinite;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .form-container {
+    background-color: #f2f7ff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  h2 {
+    margin-bottom: 30px;
+    color: #536a99;
+    text-align: center;
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  label {
+    width: 30%;
+    margin-right: 10px;
+    color: #536a99;
+  }
+  
+  input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .form-footer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 105px;
+    padding: 10px;
+    background-color: #3e5d9b;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  button:hover {
+    background-color: #849ed3;
+  }
