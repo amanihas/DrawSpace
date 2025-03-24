@@ -9,7 +9,7 @@ const createElement = (id, x1, y1, x2, y2, type) => {
     switch (type) {
         case "line":
         case "rectangle":
-            const roughElement =
+            const roughElement = 
                 type === "line"
                     ? generator.line(x1, y1, x2, y2)
                     : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
