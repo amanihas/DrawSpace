@@ -5,6 +5,9 @@ import dotenv from "dotenv";
 import { nanoid } from "nanoid";
 import sgMail from '@sendgrid/mail'
 import jwt from 'jsonwebtoken'
+import axios from "axios";
+import multer from 'multer'
+
 
 dotenv.config()
 
@@ -37,14 +40,35 @@ const User = mongoose.model("User",new mongoose.Schema({
     password: String,
     email: String,
     validated: {type: Boolean, default: false},
-    verify_token: {type: String, default: ()=> nanoid(32)}
+    verify_token: {type: String, default: ()=> nanoid(32)},
+    friends_list: [{
+        friend_id: String,
+        friend_username: String
+      }],
+      gallery: [{
+        image_id: {
+          type: String,
+          default: () => nanoid(16)
+        },
+        image_title: String,
+        date_created: {
+          type: Date,
+          default: Date.now
+        }
+      }]
+    }));
 
-}))
+
+
 
 
 // Connects to the Email Service with SendGrid Key
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+const cloudFlare_ID = process.env.CLOUDFLARE_ACCOUNT_ID
+const cloudFlare_API_KEY = process.env.CLOUDFLARE_GLOBAL_API_KEY
+const cloudFlare_Email = process.env.CLOUDFLARE_EMAIL
 
 
 // Endpoint that Handles User Registration
@@ -131,6 +155,51 @@ app.get("/user-data",verify_jwt_token, async (req, res) => {
     const user = await User.findOne({userName: req.user.userName});
     return res.status(200).json({userName: user.userName, email: user.email});
 })
+
+// Endpoint that updates the user gallery once an image is uploaded
+// contains the image_id, title and date created 
+
+app.post('/update-user-gallery', async (req, res) => {
+    const {user_data, image_id, image_title, date_created } = req.body;
+    const { userName, email } = user_data;
+     
+    try {
+      const user = await User.findOne(user_data);
+      if (!user) {
+        return res.status(404).json({ success: false, message: 'User not found' });
+      }
+  
+      user.gallery.push({ image_id, image_title, date_created });
+      await user.save();
+      
+      res.json({ success: true });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, error: error.message });
+    }
+  });
+
+// cloudFlare get Upload URL 
+
+app.post('/getUploadURL', async (req, res) => {
+    const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${cloudFlare_ID}/images/v2/direct_upload`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${process.env.CLOUDFLARE_BEARER_TOKEN}`
+      }
+    });
+  
+    const data = await response.json();
+    if (response.ok) {
+      // You should get an upload URL from the response
+      res.json(data)
+    } else {
+      console.error('Error creating direct upload:', data);
+      throw new Error('Failed to get upload URL');
+    }
+  });
+
+
 
 // Endpoint that Verifies the User
 // Once Clicked the User is Validated and can Sign In

@@ -2,6 +2,10 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
 import { useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { nanoid } from "nanoid";
+import axios from "axios";
+
 
 const generator = rough.generator();
 
@@ -221,6 +225,114 @@ const Canvas = () => {
     const textAreaRef = useRef();
     const pressedKeys = usePressedKeys();
     const navigate = useNavigate();
+    const [imageName,setImageName] = useState("")
+    const [ImageData,setImageData] = useState({imageName: "", imageID: "", dateCreated: ""})
+
+
+    // Takes a ScreenShot of the User's Current Drawing, Now we need to send this to
+    // a database, I wonder how I should this this
+    const contentRef = useRef()
+
+    // create an effect, that can be called within the takeScreen
+    // Create a second Function called Download Locally
+    // save the Image Id to the users Image Shcema, Along with a Date
+    // Should be saved to cloudflare like this
+    // imageID-userID-ImageName-ImageDate(useUnix Timestamp)
+
+
+   
+
+
+
+    // image/name format  - (image_id)-(image_name)-(unixTimestamp)
+    // exe: uu78129-cartoon dog-0001295888 (idk unix by heart)
+   const uploadImageToGallery = async () => {
+
+        if(!contentRef.current || !imageName)
+        {
+            alert("Enter a valid Image name")
+            console.log("Invalid Content or Image Name")
+            return
+        }
+        
+        console.log("clicked")
+        const response = await fetch('http://localhost:5000/getUploadURL', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await response.json()
+        console.log(data)
+        const uploadURL = data.result.uploadURL
+        const imageID = data.result.id
+
+        const html2canvas = await (contentRef.current)
+        const image = html2canvas.toDataURL("image/png",1.0)
+
+
+        const blob = await fetch(image)
+        .then(res => res.blob())
+        .catch(err => {
+            console.error("Error converting base64 to Blob", err);
+        });
+
+        const file = new File([blob], imageName + ".png", { type: "image/png" });
+
+        console.log(imageID)
+        
+        const cloudflarePostBody = new FormData();
+        cloudflarePostBody.append("file", file)
+
+        const uploadImageResponse = await fetch(uploadURL, {
+            method: "POST",
+            body: cloudflarePostBody
+        });
+
+        if (!uploadImageResponse.ok) {
+            console.error("Error uploading image:", uploadImageResponse);
+            return;
+        }
+
+        const updateResponse = await fetch('http://localhost:5000/update-user-gallery', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              user_data: user,
+              image_id: imageID,
+              image_title: imageName,
+              date_created: Math.floor(Date.now() / 1000)
+            }),
+          });
+
+          console.log(user)
+        
+    }
+
+
+    const DownloadImage=()=> {
+
+        html2canvas(contentRef.current).then((canvas)=>{
+            let image = canvas.toDataURL("image/png",1.0);
+            console.log(image)
+            const a = document.createElement("a")
+            a.href = image;
+            a.download = imageName + ".png"
+            a.click()
+
+
+        }).catch(err =>{
+            console.error("Screenshot Failed")
+        })
+
+    }
+
+    const handleNameChange = (e) => {
+        setImageName(e.target.value)
+    }
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -505,7 +617,11 @@ const Canvas = () => {
             <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }}>
                 <button onClick={undo}>Undo</button>
                 <button onClick={redo}>Redo</button>
+                <button onClick={uploadImageToGallery}> Upload Image to Gallery</button>
+                <button onClick={DownloadImage} style={{zIndex: 2, right: 10, padding: 10}}> Download Image </button>
+                <input type="text" onChange={ handleNameChange} value={imageName}/>
             </div>
+          
             {action === "writing" ? (
                 <textarea
                     ref={textAreaRef}
@@ -527,9 +643,10 @@ const Canvas = () => {
                     }}
                 />
             ) : null}
-
+            <div >
             <canvas
                 id="canvas"
+                ref={contentRef}
                 width={window.innerWidth}
                 height={window.innerHeight}
                 onMouseDown={handleMouseDown}
@@ -539,6 +656,7 @@ const Canvas = () => {
             >
                 Canvas
             </canvas>
+            </div>
         </div>
     );
 };
