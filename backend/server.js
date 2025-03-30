@@ -7,6 +7,12 @@ import sgMail from '@sendgrid/mail'
 import jwt from 'jsonwebtoken'
 import axios from "axios";
 import multer from 'multer'
+import path from 'path'
+import { fileURLToPath } from "url";
+
+// Get directory name for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 dotenv.config()
@@ -25,7 +31,7 @@ console.log("SendGrid API Key loaded:", !!process.env.SENDGRID_API_KEY);
 
 
 mongoose.connect(process.env.MONGO_URI, {
-    useNewURLParser: true,
+    useNewUrlParser: true,
     useUnifiedTopology: true
 })
 .then(() => console.log("Connection Sucsessful"))
@@ -222,5 +228,17 @@ app.get("/verifyUser/:token", async (req,res) =>{
     }
    return  res.status(200).json({message:"User Verified"})
 })
+
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve static files from the React app
+  app.use(express.static(path.join(__dirname, '../DrawSpace/build')));
+  
+  // Handle React routing, return all requests to React app
+  app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../DrawSpace/build', 'index.html'));
+  });
+}
+
 
 app.listen(PORT, ()=> console.log("Backend Running at port " + PORT ))
