@@ -22,6 +22,18 @@ const PORT = process.env.PORT || 5000;
 console.log("MongoDB URI:", process.env.MONGO_URI);
 console.log("SendGrid API Key loaded:", !!process.env.SENDGRID_API_KEY);
 
+const path = require('path');
+const express = require('express');
+
+// Serve static files from React in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../build')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..build', 'index.html'));
+  });
+}
+
 
 
 mongoose.connect(process.env.MONGO_URI, {
