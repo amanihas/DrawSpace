@@ -44,6 +44,9 @@ const verify_jwt_token = (req, res, next) => {
   })
 }
 
+// Endpoint that Verifies the User
+// Once Clicked the User is Validated and can Sign In
+
 app.get("/verifyUser/:token", async (req,res) =>{
   const {token} = req.params;
   console.log(token)
@@ -241,26 +244,5 @@ app.post('/getUploadURL', async (req, res) => {
 
 
 
-// Endpoint that Verifies the User
-// Once Clicked the User is Validated and can Sign In
-
-app.get("/verifyUser/:token", async (req,res) =>{
-    const {token} = req.params;
-    console.log(token)
-
-    try{
-       const updatedUser = await  User.findOneAndUpdate(
-            { verify_token: token },  
-            { $set: { validated: true } }, 
-            { new: true } 
-        );
-
-    }
-    catch(err){
-        console.log(err)
-        return res.status(500).json({ message: "Server error during verification" });
-    }
-   return  res.status(200).json({message:"User Verified"})
-})
 
 app.listen(PORT, ()=> console.log("Backend Running at port " + PORT ))
