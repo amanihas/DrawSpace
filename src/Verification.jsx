@@ -11,9 +11,14 @@ export default function Verification(){
     console.log("Token from URL:", token); 
 
     useEffect(() => {
+
+        const API_URL = process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:5000'  // Dev: Connect to local backend
+        : ''; 
+    
         const verifyUser = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/verifyUser/${cleanedToken}`, {
+                const response = await fetch(`${API_URL}verifyUser/${cleanedToken}`, {
                     method: "GET",
                 });
 

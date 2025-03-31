@@ -11,6 +11,10 @@ export default function Register() {
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
+    const API_URL = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:5000'  // Dev: Connect to local backend
+    : ''; 
+
     e.preventDefault();
     if(userInfo.password !== userInfo.con_psw){
       alert("Passwords do not match");
@@ -19,7 +23,7 @@ export default function Register() {
     setFormSubmitted(true);
     const timestamp = Math.floor(Date.now() / 1000);
     console.log("User Submission Request, Submitted at " + timestamp);
-    const response = await fetch('http://localhost:5000/HandleRegistration', {
+    const response = await fetch(`${API_URL}/HandleRegistration`, {
       method: 'POST',
       headers: { 'Content-Type': "application/json" },
       body: JSON.stringify(userInfo)

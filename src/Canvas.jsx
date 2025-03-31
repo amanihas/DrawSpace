@@ -228,6 +228,9 @@ const Canvas = () => {
     const [imageName,setImageName] = useState("")
     const [ImageData,setImageData] = useState({imageName: "", imageID: "", dateCreated: ""})
 
+    const API_URL = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:5000'  // Dev: Connect to local backend
+    : ''; 
 
     // Takes a ScreenShot of the User's Current Drawing, Now we need to send this to
     // a database, I wonder how I should this this
@@ -248,6 +251,8 @@ const Canvas = () => {
     // exe: uu78129-cartoon dog-0001295888 (idk unix by heart)
    const uploadImageToGallery = async () => {
 
+
+
         if(!contentRef.current || !imageName)
         {
             alert("Enter a valid Image name")
@@ -256,7 +261,7 @@ const Canvas = () => {
         }
         
         console.log("clicked")
-        const response = await fetch('http://localhost:5000/getUploadURL', {
+        const response = await fetch(`${API_URL}/getUploadURL`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -295,7 +300,7 @@ const Canvas = () => {
             return;
         }
 
-        const updateResponse = await fetch('http://localhost:5000/update-user-gallery', {
+        const updateResponse = await fetch(`${API_URL}/update-user-gallery`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -341,7 +346,7 @@ const Canvas = () => {
             alert("Unauthorized access. Please log in.");
             navigate("/signin");
         } else {
-            fetch("http://localhost:5000/user-data", {
+            fetch(`{API_URL}/user-data`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
             })

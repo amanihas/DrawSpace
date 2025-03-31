@@ -19,12 +19,16 @@ export default  function Brainstormer() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        const API_URL = process.env.NODE_ENV === 'development' 
+        ? 'http://localhost:5000'  // Dev: Connect to local backend
+        : ''; 
+    
     
         if (!token) {
             alert("Unauthorized access. Please log in.");
             navigate("/signin");
         } else {
-            fetch("http://localhost:5000/user-data", {
+            fetch(`${API_URL}/user-data`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
             })

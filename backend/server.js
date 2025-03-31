@@ -107,7 +107,7 @@ app.post("/HandleRegistration", async (req, res)=>{
             from: 'servlet330@gmail.com',
             subject: 'Email Verification',
             text: `Your Journey at DrawSpace is just Beginning! Click the following link to verify: \n
-            <a href="http://localhost:3000/verification/${newUser.verify_token}">Verify Your Account</a>`
+            <a href="https://morning-river-24657-2a6c6eb4ef81.herokuapp.com/verification/${newUser.verify_token}">Verify Your Account</a>`
         }
 
         sgMail
