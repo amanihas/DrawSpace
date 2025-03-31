@@ -32,8 +32,8 @@
   "server": "cd backend && node server.js",
   "client": "cd DrawSpace && npm start",
   "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "build": "cd DrawSpace && npm install && npm run build",
-  "heroku-postbuild": "npm run build"
+  "client-build": "cd DrawSpace && npm install && npm run build",
+  "heroku-postbuild": "npm run client-build"
 },
   "eslintConfig": {
     "extends": [
