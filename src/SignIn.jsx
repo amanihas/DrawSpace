@@ -20,10 +20,14 @@ export default function SignIn() {
     // 4. Sign In Failed : User not Verified
     // message will be appended to the component, via resData use json for temporary alert
 
+    const API_URL = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:5000'  // Dev: Connect to local backend
+    : ''; 
+
     const timestamp = Math.floor(Date.now() / 1000);
     console.log("User Sign In Request, Submitted at " + timestamp);
     try{
-        const response = await fetch('http://localhost:5000/HandleSignIn',{
+        const response = await fetch(`${API_URL}/HandleSignIn`,{
         method: 'POST',
         headers: { 'Content-Type': "application/json" },
         body: JSON.stringify(userInfo)
