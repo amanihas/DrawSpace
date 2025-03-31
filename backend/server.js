@@ -7,9 +7,10 @@ import sgMail from '@sendgrid/mail'
 import jwt from 'jsonwebtoken'
 import axios from "axios";
 import multer from 'multer'
+import path from 'path'
 
 
-dotenv.config()
+dotenv.config({ path: './backend/.env' });
 
 const app = express()
 app.use(cors())
@@ -19,11 +20,11 @@ const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB database, create user schema and model
 
+
 console.log("MongoDB URI:", process.env.MONGO_URI);
 console.log("SendGrid API Key loaded:", !!process.env.SENDGRID_API_KEY);
 
-const path = require('path');
-const express = require('express');
+
 
 // Serve static files from React in production
 if (process.env.NODE_ENV === 'production') {
