@@ -17,7 +17,7 @@ export default function Verification(){
 
         const API_URL = process.env.NODE_ENV === 'development' 
         ? 'http://localhost:5000'  // Dev: Connect to local backend
-        : ''; 
+        : 'https://morning-river-24657-2a6c6eb4ef81.herokuapp.com'; 
 
         console.log("Request URL:", `${API_URL}/verifyUser/${cleanedToken}`);
     
