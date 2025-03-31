@@ -17,8 +17,8 @@ export default function Application() {
       <Route path="/signin" element={<SignIn />} /> 
       <Route path="/verification/:token" element={<Verification />} />
       <Route path="/user-dashboard" element={<UserDashboard />} />
-      <Route path="brainstormer"  element={<Brainstormer />} />
-      <Route path="canvas" element={<Canvas />} />
+      <Route path="/brainstormer"  element={<Brainstormer />} />
+      <Route path="/canvas" element={<Canvas />} />
     </Routes>
   );
 }
