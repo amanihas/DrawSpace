@@ -346,7 +346,7 @@ const Canvas = () => {
             alert("Unauthorized access. Please log in.");
             navigate("/signin");
         } else {
-            fetch(`{API_URL}/user-data`, {
+            fetch(`${API_URL}/user-data`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
             })
