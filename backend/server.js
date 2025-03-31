@@ -29,10 +29,6 @@ const PORT = process.env.PORT || 5000;
 console.log("MongoDB URI:", process.env.MONGO_URI);
 console.log("SendGrid API Key loaded:", !!process.env.SENDGRID_API_KEY);
 
-
-// Endpoint that Verifies the User
-// Once Clicked the User is Validated and can Sign In
-
 app.get("/verifyUser/:token", async (req,res) =>{
   const {token} = req.params;
   console.log(token)
@@ -51,6 +47,7 @@ app.get("/verifyUser/:token", async (req,res) =>{
   }
  return  res.status(200).json({message:"User Verified"})
 })
+
 
 
 // Serve static files from React in production
@@ -173,14 +170,6 @@ app.post("/HandleSignIn", async (req, res) => {
 }
 )
 
-// Endpoint that Returns User Data
-// Used by the User Dashboard to Display User Data
-
-app.get("/user-data",verify_jwt_token, async (req, res) => {
-  const user = await User.findOne({userName: req.user.userName});
-  return res.status(200).json({userName: user.userName, email: user.email});
-})
-
 // Middleware that Verifies the JWT Token
 
 const verify_jwt_token = (req, res, next) => {
@@ -196,7 +185,13 @@ const verify_jwt_token = (req, res, next) => {
     })
 }
 
+// Endpoint that Returns User Data
+// Used by the User Dashboard to Display User Data
 
+app.get("/user-data",verify_jwt_token, async (req, res) => {
+    const user = await User.findOne({userName: req.user.userName});
+    return res.status(200).json({userName: user.userName, email: user.email});
+})
 
 // Endpoint that updates the user gallery once an image is uploaded
 // contains the image_id, title and date created 
@@ -243,6 +238,26 @@ app.post('/getUploadURL', async (req, res) => {
 
 
 
+// Endpoint that Verifies the User
+// Once Clicked the User is Validated and can Sign In
 
+app.get("/verifyUser/:token", async (req,res) =>{
+    const {token} = req.params;
+    console.log(token)
+
+    try{
+       const updatedUser = await  User.findOneAndUpdate(
+            { verify_token: token },  
+            { $set: { validated: true } }, 
+            { new: true } 
+        );
+
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).json({ message: "Server error during verification" });
+    }
+   return  res.status(200).json({message:"User Verified"})
+})
 
 app.listen(PORT, ()=> console.log("Backend Running at port " + PORT ))
