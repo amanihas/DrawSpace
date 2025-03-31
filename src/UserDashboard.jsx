@@ -7,7 +7,9 @@ export default function UserDashboard() {
     const navigate = useNavigate();
 
     // Checks if the user has a token, if not, redirects to Sign In
-    
+    const API_URL = process.env.NODE_ENV === 'development' 
+    ? 'http://localhost:5000'  // Dev: Connect to local backend
+    : ''; 
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -16,7 +18,7 @@ export default function UserDashboard() {
             alert("Unauthorized access. Please log in.");
             navigate("/signin");
         } else {
-            fetch("http://localhost:5000/user-data", {
+            fetch(`${API_URL}/user-data`, {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },
             })
