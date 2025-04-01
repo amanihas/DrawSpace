@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./UserDashboard.css";
 
 export default function UserDashboard() {
     const [user, setUser] = useState({}); 
     const navigate = useNavigate();
 
-    // Checks if the user has a token, if not, redirects to Sign In
     const API_URL = process.env.NODE_ENV === 'development' 
     ? 'http://localhost:5000'  // Dev: Connect to local backend
     : ''; 
@@ -23,42 +22,42 @@ export default function UserDashboard() {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((res) => {
-                if (res.status < 200 || res.status >= 300) {  // Check for a successful status code range
+                if (res.status < 200 || res.status >= 300) {
                     localStorage.removeItem("token");
                     alert("Session expired or unauthorized. Redirecting to Home.");
-                    navigate("/");  // Redirect to Home
+                    navigate("/");
                     return;
                 }
-                return res.json();  // Proceed if status is in the 200-299 range
+                return res.json();
             })
             .then((data) => {
                 if (data) {
-                    setUser(data); // Set the user data to the state
+                    setUser(data);
                 }
             })
             .catch(() => {
                 alert("Error fetching user data.");
                 localStorage.removeItem("token");
-                navigate("/");  // Redirect to Home on error
+                navigate("/");
             });
         }
     }, [navigate]);
 
     const goToBrainstormer = () => {
-        navigate("/brainstormer");  // Navigate to Brainstormer page
+        navigate("/brainstormer");
     };
     const gotoCanvas = () => {
-        navigate("/canvas");        // Navigate to Canvas page
-    }
-
-
+        navigate("/canvas");
+    };
 
     return (
-        <div>
+        <div className="dashboard-container">
             <h1>User Dashboard</h1>
-            <p>Welcome to your dashboard {user.userName}</p>
-            <button onClick={goToBrainstormer}>Go to Brainstormer</button>
-            <button onClick={gotoCanvas}>Go to Canvas</button>
+            <p>Welcome to your dashboard, {user.userName}</p>
+            <div className="dashboard-buttons">
+                <button onClick={goToBrainstormer}>Go to Brainstormer</button>
+                <button onClick={gotoCanvas}>Go to Canvas</button>
+            </div>
         </div>
-    )
+    );
 }

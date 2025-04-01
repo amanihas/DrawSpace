@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import html2canvas from "html2canvas";
 import { nanoid } from "nanoid";
 import axios from "axios";
+import "./Brainstormer.css";
+import "./Canvas.css";
 
 
 const generator = rough.generator();
@@ -460,9 +462,10 @@ const Canvas = () => {
         setElements(elementsCopy, true);
     };
 
-    const getMouseCoordinates = event => {
+    const getMouseCoordinates = (event) => {
+        const headerHeight = document.querySelector(".header").offsetHeight; // Get the height of the header
         const clientX = event.clientX - panOffset.x;
-        const clientY = event.clientY - panOffset.y;
+        const clientY = event.clientY - panOffset.y - headerHeight; // Subtract the header height
         return { clientX, clientY };
     };
 
@@ -590,9 +593,19 @@ const Canvas = () => {
         updateElement(id, x1, y1, null, null, type, { text: event.target.value });
     };
 
+    const goToDashboard = () => {
+        navigate("/user-dashboard");
+    };
+
     return (
         <div>
-            <div style={{ position: "fixed", zIndex: 2 }}>
+          <div className="header">
+                <h1>Canvas</h1>
+                <button className="dashboard-button" onClick={goToDashboard}>
+                    Go to Dashboard
+                </button>
+            </div>  
+            <div style={{ position: "fixed", zIndex: 2, top: "100px", left: "-100px" }} className="tool-options">
                 <input
                     type="radio"
                     id="selection"
@@ -600,7 +613,12 @@ const Canvas = () => {
                     onChange={() => setTool("selection")}
                 />
                 <label htmlFor="selection">Selection</label>
-                <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
+                <input
+                    type="radio"
+                    id="line"
+                    checked={tool === "line"}
+                    onChange={() => setTool("line")}
+                />
                 <label htmlFor="line">Line</label>
                 <input
                     type="radio"
@@ -616,14 +634,20 @@ const Canvas = () => {
                     onChange={() => setTool("pencil")}
                 />
                 <label htmlFor="pencil">Pencil</label>
-                <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
+                <input
+                    type="radio"
+                    id="text"
+                    checked={tool === "text"}
+                    onChange={() => setTool("text")}
+                />
                 <label htmlFor="text">Text</label>
             </div>
-            <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }}>
+            {/* <div style={{ position: "fixed", zIndex: 2, bottom: 0, padding: 10 }}> */}
+            <div className="bottom-buttons">
                 <button onClick={undo}>Undo</button>
                 <button onClick={redo}>Redo</button>
-                <button onClick={uploadImageToGallery}> Upload Image to Gallery</button>
-                <button onClick={DownloadImage} style={{zIndex: 2, right: 10, padding: 10}}> Download Image </button>
+                <button onClick={uploadImageToGallery}>Add to Gallery</button>
+                <button onClick={DownloadImage} style={{zIndex: 2, right: 10, padding: 10}}>Download</button>
                 <input type="text" onChange={ handleNameChange} value={imageName}/>
             </div>
           

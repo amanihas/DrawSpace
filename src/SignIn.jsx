@@ -54,7 +54,7 @@ export default function SignIn() {
         <h2>Sign In</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="userName">userName:</label>
+            <label htmlFor="userName">Username:</label>
             <input
               type="text"
               onChange={(e) => setUserInfo({ ...userInfo, userName: e.target.value })}

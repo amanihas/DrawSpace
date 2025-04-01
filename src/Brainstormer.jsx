@@ -1,28 +1,24 @@
-import { useState } from "react";
-import { Rnd } from "react-rnd";
-import { v4 as uuidv4 } from "uuid";
-import Button from './ui/Stickybutton';
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Brainstormer.css";
-
 // BrainStormer
 // Add Links to Canvas and back to the User Dashboard
 // Currently Checks if User has a token, if not, redirects to Sign In
 
-export default  function Brainstormer() {
+import { useState, useEffect } from "react";
+import { Rnd } from "react-rnd";
+import { v4 as uuidv4 } from "uuid";
+import { useNavigate } from "react-router-dom";
+import "./Brainstormer.css";
+
+export default function Brainstormer() {
     const [notes, setNotes] = useState([]);
     const [user, setUser] = useState({});
-    const [selectedColor, setSelectedColor] = useState("yellow");     // Default color
-
+    const [selectedColor, setSelectedColor] = useState("yellow"); // Default color
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         const API_URL = process.env.NODE_ENV === 'development' 
-        ? 'http://localhost:5000'  // Dev: Connect to local backend
-        : ''; 
-    
+            ? 'http://localhost:5000'  // Dev: Connect to local backend
+            : ''; 
     
         if (!token) {
             alert("Unauthorized access. Please log in.");
@@ -33,38 +29,36 @@ export default  function Brainstormer() {
                 headers: { Authorization: `Bearer ${token}` },
             })
             .then((res) => {
-                if (res.status < 200 || res.status >= 300) {  // Check for a successful status code range
+                if (res.status < 200 || res.status >= 300) {
                     localStorage.removeItem("token");
                     alert("Session expired or unauthorized. Redirecting to Home.");
-                    navigate("/");  // Redirect to Home
+                    navigate("/");
                     return;
                 }
-                return res.json();  // Proceed if status is in the 200-299 range
+                return res.json();
             })
             .then((data) => {
                 if (data) {
-                    setUser(data); // Set the user data to the state
+                    setUser(data);
                 }
             })
             .catch(() => {
                 alert("Error fetching user data.");
                 localStorage.removeItem("token");
-                navigate("/");  // Redirect to Home on error
+                navigate("/");
             });
         }
     }, [navigate]);
 
     const goToDashboard = () => {
-        navigate("/user-dashboard");  // Navigate to User Dashboard page
-    }
+        navigate("/user-dashboard");
+    };
 
-
-    // Function to add a new sticky note with the selected color
     const addNote = () => {
         const newNote = {
             id: uuidv4(),
             text: "New Note",
-            color: selectedColor, // Use the selected color
+            color: selectedColor,
             x: 100,
             y: 100,
             width: 200,
@@ -86,24 +80,29 @@ export default  function Brainstormer() {
             {/* Header Section */}
             <div className="header">
                 <h1>Brainstormer</h1>
-                <Button onClick={goToDashboard} className="mb-4">Go to Dashboard</Button>
+                <button className="dashboard-button" onClick={goToDashboard}>
+                    Go to Dashboard
+                </button>
             </div>
 
-            <Button onClick={addNote} className="mb-4">Add Note</Button>
+            {/* Controls Section */}
+            <div className="controls">
+                <button className="add-note-button" onClick={addNote}>
+                    Add Note
+                </button>
+                <select
+                    value={selectedColor}
+                    onChange={(e) => setSelectedColor(e.target.value)}
+                >
+                    <option value="yellow">Yellow</option>
+                    <option value="lightblue">Light Blue</option>
+                    <option value="pink">Pink</option>
+                    <option value="lightgreen">Light Green</option>
+                    <option value="lavender">Lavender</option>
+                </select>
+            </div>
 
-            {/* Color Picker */}
-            <select
-                value={selectedColor}
-                onChange={(e) => setSelectedColor(e.target.value)}
-                className="mb-4 p-2"
-            >
-                <option value="yellow">Yellow</option>
-                <option value="lightblue">Light Blue</option>
-                <option value="pink">Pink</option>
-                <option value="lightgreen">Light Green</option>
-                <option value="lavender">Lavender</option>
-            </select>
-
+            {/* Sticky Notes */}
             {notes.map((note) => (
                 <Rnd
                     key={note.id}
@@ -113,13 +112,13 @@ export default  function Brainstormer() {
                         updateNote(note.id, { width: ref.offsetWidth, height: ref.offsetHeight, ...position })
                     }
                     className="sticky-note"
-                    style={{ backgroundColor: note.color }} // Apply selected color
+                    style={{ backgroundColor: note.color }}
                 >
-          <textarea
-              className="w-full h-full bg-transparent resize-none p-2 focus:outline-none"
-              value={note.text}
-              onChange={(e) => updateNote(note.id, { text: e.target.value })}
-          />
+                    <textarea
+                        className="w-full h-full bg-transparent resize-none p-2 focus:outline-none"
+                        value={note.text}
+                        onChange={(e) => updateNote(note.id, { text: e.target.value })}
+                    />
                     <button
                         className="absolute top-0 right-0 p-1 text-xs text-red-500"
                         onClick={() => deleteNote(note.id)}
@@ -131,5 +130,3 @@ export default  function Brainstormer() {
         </div>
     );
 }
-
-

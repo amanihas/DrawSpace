@@ -24,17 +24,16 @@
     "react-router-dom": "^7.1.5",
     "react-scripts": "5.0.1",
     "roughjs": "^4.6.6",
-    "web-vitals": "^4.2.4",
-     "concurrently": "^9.1.2"
+    "web-vitals": "^4.2.4"
   },
-"scripts": {
-  "start": "node backend/server.js",
-  "server": "node backend/server.js",
-  "client": "react-scripts start",
-  "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "build": "react-scripts build",
-  "heroku-postbuild": "npm run build"
-},
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "node backend/server.js",
+    "client": "react-scripts start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "react-scripts build",
+    "heroku-postbuild": "npm run build"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

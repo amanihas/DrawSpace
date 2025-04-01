@@ -1,33 +1,84 @@
 /* Header Styles */
 .header {
-    background-color: #000080; /* Dark background for the header */
-    padding: 30px;
-    color: white;
-    text-align: center;
-  }
-  
-  .header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  /* Sticky Note Styles */
-  .sticky-note {
-    background-color: yellow;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    width: 200px;
-    height: 150px;
-    font-family: Arial, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  
-  
+  background-color: #0a022e; /* Dark background for the header */
+  padding: 30px;
+  color: white;
+  text-align: center;
+  position: relative; /* To position the "Go to Dashboard" button */
+}
+
+.header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Go to Dashboard Button */
+.header .dashboard-button {
+  position: absolute;
+  top: 20px; /* Adjust vertical alignment */
+  right: 30px; /* Adjust horizontal alignment */
+  padding: 10px 20px; /* Adjust padding to avoid excessive width */
+  background-color: #3e5d9b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+  min-width: 200px; /* Set a minimum width to ensure the text fits */
+  text-align: center;
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Prevent text overflow */
+}
+
+.header .dashboard-button:hover {
+  background-color: #536a99;
+}
+
+/* Sticky Note Styles */
+.sticky-note {
+  background-color: yellow;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  height: 150px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.controls .add-note-button {
+  margin-left: 20px;
+  padding: 10px 20px;
+  background-color: #3e5d9b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.controls .add-note-button:hover {
+  background-color: #536a99;
+}
+
+.controls select {
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
