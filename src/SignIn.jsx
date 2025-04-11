@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import './Register.css';
+import './Form.css';
 import { data, useNavigate } from 'react-router-dom';
+import Nav from './Nav';
 export default function SignIn() {
 
 
@@ -50,11 +51,12 @@ export default function SignIn() {
 
   return (
     <div className="form-body">
+      <Nav />
       <div className="form-container">
         <h2>Sign In</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="userName">userName:</label>
+            <label htmlFor="userName">Username:</label>
             <input
               type="text"
               onChange={(e) => setUserInfo({ ...userInfo, userName: e.target.value })}

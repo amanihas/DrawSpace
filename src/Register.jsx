@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import './Register.css';
+import './Form.css';
+import Nav from './Nav';
 
 
 // missing password validation
@@ -33,6 +34,7 @@ export default function Register() {
 
   return (
     <div className="form-body">
+      <Nav />
       <div className="form-container">
         <h2>Start your Journey!</h2>
         <form onSubmit={handleSubmit}>

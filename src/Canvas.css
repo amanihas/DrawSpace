@@ -1,40 +1,109 @@
-.App {
-    text-align: center;
-  }
+/* Base page styling */
+.canvas-page {
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  padding-top: 70px; /* Space for fixed Navbar */
+}
 
-  
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
-  .App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
+/* Star overlay (if you wish to keep a star animation in the background) */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Container for the canvas and the toolbox */
+.canvas-container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 70px);
+}
+
+/* Canvas wrapper styles */
+.canvas-wrapper {
+  flex: 1;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  margin: 10px;
+  overflow: hidden;
+}
+
+/* The canvas itself */
+canvas {
+  display: block;
+}
+
+/* Text area for writing (if tool is text) */
+.canvas-textarea {
+  position: absolute;
+  font: 24px sans-serif;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  color: #333;
+}
+
+/* Toolbox styling on the right */
+.toolbox {
+  width: 240px;
+  background-color: #f2f7ff;
+  border-left: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+.toolbox h3 {
+  color: #1E90FF;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.toolbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Radio button labels */
+.toolbox-group label {
+  font-size: 1rem;
+  color: #536a99;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Toolbox buttons */
+.toolbox button {
+  padding: 10px;
+  background-color: #3e5d9b;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toolbox button:hover {
+  background-color: #849ed3;
+}
+
+/* Toolbox input */
+.toolbox input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
