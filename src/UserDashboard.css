@@ -1,0 +1,91 @@
+/* Reset and base styling */
+* {
+  box-sizing: border-box;
+}
+
+.dashboard {
+  background-color: #f9f9f9; /* Off white to match Home and Form pages */
+  min-height: 100vh;
+  position: relative;
+  padding-top: 70px; /* Allows space for the fixed Navbar */
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Star animation overlay */
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: flash 3s infinite ease-in-out;
+}
+
+@keyframes flash {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Dashboard content */
+.dashboard-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboard-content h1 {
+  font-size: 3rem;
+  color: #1E90FF;
+  margin-bottom: 20px;
+}
+
+.dashboard-content p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Navigation buttons */
+.dashboard-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dashboard-buttons button {
+  padding: 10px 20px;
+  background-color: #3e5d9b;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dashboard-buttons button:hover {
+  background-color: #849ed3;
+}
+
+/* Responsive adjustments for smaller devices */
+@media (max-width: 768px) {
+  .dashboard-content h1 {
+    font-size: 2.2rem;
+  }
+  .dashboard-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

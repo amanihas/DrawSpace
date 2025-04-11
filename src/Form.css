@@ -1,0 +1,97 @@
+/* Base styling shared with Home.css */
+.form-body {
+    background-color: #f9f9f9; /* Off white */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px; /* Pushed down to match Home layout */
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Form container centered on the page */
+  .form-container {
+    background-color: #f2f7ff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin-top: 80px;
+  }
+  
+  /* Heading styling similar to the Home page headline */
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #1E90FF; /* Blue accent */
+  }
+  
+  /* Form Group layout */
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  /* Label styling aligned with Home.css color palette */
+  label {
+    width: 30%;
+    margin-right: 10px;
+    color: #536a99;
+  }
+  
+  /* Input field styling */
+  input {
+    width: 70%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Footer container for the submit button */
+  .form-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  /* Button styling matching Home.css accents */
+  button {
+    width: 100%;
+    max-width: 105px;
+    padding: 10px;
+    background-color: #3e5d9b;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  button:hover {
+    background-color: #849ed3;
+  }
+  
+  /* Responsive adjustments for smaller devices */
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2.2rem;
+    }
+  
+    .form-container {
+      padding: 20px;
+    }
+  }
+  
+  /* Adjustments for very large screens to lower the form */
+  @media (min-width: 1400px) {
+    .form-body {
+      padding-top: 200px; /* Extra top padding for larger monitors */
+    }
+  }
+  

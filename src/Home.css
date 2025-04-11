@@ -1,65 +1,119 @@
-.Home {
+.home-container {
+  background-color: #f9f9f9; /* Off white */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #0a022e;
-  padding: 0 200px;
 }
 
-.navbar {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 25px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.nav-link {
-  color: #536a99;
-  text-decoration: none;
-  font-size: 1.2em;
-  margin-left: 20px;
-  margin-right: 10px;
-}
-
+/* Landing page container */
 .landing-page {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  width: 100%;
+  margin-top: 100px; /* Pushed lower */
+  padding: 0 40px;
+  gap: 50px; /* Provides space between text and image */
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Content styling */
 .content {
-  text-align: left;
+  flex: 1;
   max-width: 600px;
-  margin: 0 20px;
 }
 
+.content h1 {
+  font-size: 3rem;
+  color: #1E90FF;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Image container styling */
 .image-container {
+  flex: 1;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 50%;
+  justify-content: center;
 }
 
 .landingpage-image {
-  max-width: 450px;
+  width: 100%;
+  max-width: 500px;
   height: auto;
-  border-radius: 15px;
-  margin: 0 80px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
-  font-size: 4em;
-  margin-bottom: 0.5em;
-  color: #536a99;
+/* Responsive adjustments for medium devices */
+@media (max-width: 1024px) {
+  .landing-page {
+    padding: 0 20px;
+    gap: 30px;
+  }
+
+  .content h1 {
+    font-size: 2.5rem;
+  }
+
+  .content p {
+    font-size: 1.1rem;
+  }
+
+  .landingpage-image {
+    max-width: 400px;
+  }
 }
 
-p {
-  font-size: 1.4em;
-  color: #536a99;
+/* Responsive adjustments for smaller devices */
+@media (max-width: 768px) {
+  .landing-page {
+    flex-direction: column;
+    text-align: center;
+    margin-top: 80px;
+  }
+
+  .content {
+    max-width: 100%;
+  }
+
+  .content h1 {
+    font-size: 2.2rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .image-container {
+    margin-top: 20px;
+  }
+}
+
+/* Optionally, adjustments for very large screens */
+@media (min-width: 1400px) {
+  .landing-page {
+    padding: 0 60px;
+    gap: 70px;
+    margin-top: 200px;
+  }
+
+  .content h1 {
+    font-size: 3.5rem;
+  }
+
+  .content p {
+    font-size: 1.3rem;
+  }
+
+  .landingpage-image {
+    max-width: 600px;
+  }
 }

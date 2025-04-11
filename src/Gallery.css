@@ -1,0 +1,38 @@
+/* Gallery page styles */
+.gallery-page {
+    background-color: #f8f8f8; /* Off-white background */
+    color: #333;
+    min-height: 100vh;
+  }
+  
+  .gallery-content {
+    padding: 100px 20px 20px; /* Extra top padding for fixed navbar */
+  }
+  
+  .gallery-content h1 {
+    margin-bottom: 20px;
+    color: #0074d9;
+  }
+  
+  /* Grid container */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 15px;
+  }
+  
+  /* Individual gallery item */
+  .gallery-item {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gallery-item img {
+    max-width: 100%;
+    border-radius: 4px;
+    display: block;
+  }
+  
