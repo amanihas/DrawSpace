@@ -12,10 +12,10 @@ function Home() {
         <div className="content">
           <h1>DrawSpace</h1>
           <p>
-            DrawSpace is a modern web-based graphics editor perfect for creating, collaborating, and connecting in real-time.
+            DrawSpace is a modern web-based graphics editor perfect for creating, collaborating, and sharing ideas.
           </p>
           <p>
-            Experience intuitive design and versatile tools to fuel your creativity—whether you’re brainstorming or playing “Sketch and Guess.”
+            Experience intuitive design and versatile tools to fuel your creativity, whether you’re brainstorming or creating artwork.
           </p>
         </div>
         <div className="image-container">
