@@ -1,7 +1,6 @@
 /* Base styling shared with Home.css */
 .form-body {
     position: relative;
-    background: rgba(9, 10, 26, 0.95);
     min-height: 100vh;
     display: flex;
     flex-direction: column;

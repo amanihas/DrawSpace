@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Animation.css';
 
 const Stars = () => {
+  const starsRef = useRef(null);
+
   useEffect(() => {
-    const container = document.querySelector('.stars');
+    const container = starsRef.current;
     if (!container) return;
 
     // Clear existing stars
@@ -12,7 +14,8 @@ const Stars = () => {
     // Create new stars with better visibility
     for (let i = 0; i < 300; i++) {
       const star = document.createElement('div');
-      const size = Math.random() > 0.7 ? 'large' : Math.random() > 0.4 ? 'medium' : 'small';
+      const size = Math.random() > 0.7 ? 'large' : 
+                   Math.random() > 0.4 ? 'medium' : 'small';
       star.className = `star ${size}`;
       star.style.left = `${Math.random() * 100}%`;
       star.style.top = `${Math.random() * 100}%`;
@@ -22,7 +25,7 @@ const Stars = () => {
     }
   }, []);
 
-  return <div className="stars"></div>;
+  return <div className="stars" ref={starsRef}></div>;
 };
 
 export default Stars;
