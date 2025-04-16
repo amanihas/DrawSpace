@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './Form.css';
 import Nav from './Nav';
+import Stars from './Stars';
 
 
 // missing password validation
@@ -34,6 +35,7 @@ export default function Register() {
 
   return (
     <div className="form-body">
+      <Stars />
       <Nav />
       <div className="form-container">
         <h2>Start your Journey!</h2>

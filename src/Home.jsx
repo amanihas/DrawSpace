@@ -1,10 +1,12 @@
 import React from 'react';
 import Nav from './Nav';
+import Stars from './Stars';
 import './Home.css';
 
 function Home() {
   return (
     <div className="home-container">
+      <Stars />
       <Nav />
       <div className="landing-page">
         <div className="content">

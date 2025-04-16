@@ -1,8 +1,10 @@
 .home-container {
-  background-color: #f9f9f9; /* Off white */
+  position: relative;
+  background-color: rgba(9, 10, 26, 0.95); /* Dark space background */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 /* Landing page container */
@@ -33,7 +35,7 @@
 
 .content p {
   font-size: 1.2rem;
-  color: #333;
+  color: #ffffff;
   margin-bottom: 10px;
 }
 

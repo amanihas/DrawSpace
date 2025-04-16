@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './Form.css';
 import { data, useNavigate } from 'react-router-dom';
 import Nav from './Nav';
+import Stars from './Stars';
 export default function SignIn() {
 
 
@@ -51,6 +52,7 @@ export default function SignIn() {
 
   return (
     <div className="form-body">
+      <Stars />
       <Nav />
       <div className="form-container">
         <h2>Sign In</h2>

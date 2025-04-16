@@ -1,6 +1,7 @@
 /* Base styling shared with Home.css */
 .form-body {
-    background-color: #f9f9f9; /* Off white */
+    position: relative;
+    background: rgba(9, 10, 26, 0.95);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -11,6 +12,8 @@
   
   /* Form container centered on the page */
   .form-container {
+    position: relative;
+    z-index: 1;
     background-color: #f2f7ff;
     padding: 30px;
     border-radius: 10px;
