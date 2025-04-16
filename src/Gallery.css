@@ -1,38 +1,79 @@
-/* Gallery page styles */
+/* Gallery.css */
 .gallery-page {
-    background-color: #f8f8f8; /* Off-white background */
-    color: #333;
-    min-height: 100vh;
-  }
-  
-  .gallery-content {
-    padding: 100px 20px 20px; /* Extra top padding for fixed navbar */
-  }
-  
-  .gallery-content h1 {
-    margin-bottom: 20px;
-    color: #0074d9;
-  }
-  
-  /* Grid container */
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 15px;
-  }
-  
-  /* Individual gallery item */
-  .gallery-item {
-    background: #fff;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .gallery-item img {
-    max-width: 100%;
-    border-radius: 4px;
-    display: block;
-  }
-  
+  min-height: 100vh;
+  background: #fafafa;
+  padding: 20px;
+}
+
+.gallery-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.gallery-content h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.gallery-content button {
+  display: block;
+  margin: 0 auto 20px auto;
+  padding: 10px 15px;
+  background: lightblue;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.gallery-content button:hover {
+  background: darkblue;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+}
+
+.gallery-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.gallery-item-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gallery-item-details p {
+  margin: 0;
+  font-weight: bold;
+  flex: 1;
+}
+
+.gallery-item-details button {
+  background: #007bff;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.gallery-item-details button:hover {
+  background: #0056b3;
+}

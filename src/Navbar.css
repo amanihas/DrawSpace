@@ -33,3 +33,18 @@
 .navbar-links .nav-link:hover {
   text-decoration: underline;
 }
+
+/* Add to existing styles */
+.navbar-links .logout-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  font-size: .8rem;
+}
+
+.navbar-links .logout-button:hover {
+  color: #ff4444; /* Red color for logout to differentiate */
+  text-decoration: underline;
+}

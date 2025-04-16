@@ -1,4 +1,6 @@
-/* Base page styling */
+/* Combined Canvas.css */
+
+/* Base page styling (from old version) */
 .canvas-page {
   background-color: #f9f9f9;
   min-height: 100vh;
@@ -25,7 +27,7 @@
   height: calc(100vh - 70px);
 }
 
-/* Canvas wrapper styles */
+/* Canvas wrapper styling: uses updated canvas area styles with old margins */
 .canvas-wrapper {
   flex: 1;
   position: relative;
@@ -40,7 +42,7 @@ canvas {
   display: block;
 }
 
-/* Text area for writing (if tool is text) */
+/* Text area for writing (if the tool is text) */
 .canvas-textarea {
   position: absolute;
   font: 24px sans-serif;
@@ -49,9 +51,10 @@ canvas {
   resize: none;
   background: transparent;
   color: #333;
+  padding: 4px;
 }
 
-/* Toolbox styling on the right */
+/* Toolbox styling on the right (from old version) */
 .toolbox {
   width: 240px;
   background-color: #f2f7ff;

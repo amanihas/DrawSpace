@@ -36,7 +36,7 @@ export default function SignIn() {
       const data =  await response.json();
       setResData(data.message);
       localStorage.setItem('token', data.token);
-      navigate("/user-dashboard")
+      navigate("/canvas")
       console.log(localStorage.getItem('token')); // REMOVE THIS later!
       alert(data.message);
     }

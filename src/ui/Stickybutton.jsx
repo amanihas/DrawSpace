@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 
-const Stickybutton = ({ children, onClick, className }) => {
-    return (
-        <button
-            className={`px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 ${className}`}
-            onClick={onClick}
-        >
-            {children}
-        </button>
-    );
+const Stickybutton = ({ children, className, onClick }) => {
+  return (
+    <button 
+      className={`sticky-button ${className}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
 };
 
-export default Stickybutton
+export default Stickybutton;
